@@ -1,5 +1,5 @@
 import os
-from nexura.providers.provider import Provider
+from nexura.providers.base import Provider
 
 
 class EdenAIProvider(Provider):

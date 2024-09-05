@@ -42,7 +42,7 @@ class Provider():
         endpoint.id = endpoint_id
         endpoint.provider = self
 
-        self.endpoints[endpoint.path] = endpoint
+        self.endpoints[endpoint.id] = endpoint
 
-    def get_endpoint(self, endpoint_path: str) -> "Endpoint":
-        return self.endpoints[endpoint_path]
+    def get_endpoint(self, endpoint_id: str) -> "Endpoint":
+        return self.endpoints[endpoint_id]

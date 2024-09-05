@@ -1,4 +1,4 @@
-from nexura.providers.provider import Provider
+from nexura.providers.base import Provider
 
 
 class OpenAIProvider(Provider):
