@@ -1052,7 +1052,7 @@
                 ],
                 "return_type": [
                     {
-                        "name": "generated_test",
+                        "name": "generated_text",
                         "type": "str",
                         "genericType": "str",
                         "description": "",
