@@ -1,6 +1,7 @@
 import typing
 from nexura.providers.provider import Provider
 from nexura.providers.openai import openai_provider
+from nexura.providers.edenai import edenai_provider
 
 
 class NexuraProvider:
@@ -31,9 +32,9 @@ class NexuraProvider:
 
         raise ValueError(f"Provider {provider_id} not found")
 
-    async def handle_request(self, provider_id: str, endpoint_path: str, **kwargs):
+    async def handle_request(self, provider_id: str, endpoint_id: str, **kwargs):
         provider = self.get_provider(provider_id)
-        endpoint = provider.get_endpoint(endpoint_path)
+        endpoint = provider.get_endpoint(endpoint_id)
         return await endpoint.handle_request(**kwargs)
 
 
@@ -43,6 +44,7 @@ nexura_provider = NexuraProvider()
 def initialize_providers():
     providers = [
         openai_provider,
+        edenai_provider
     ]
 
     for provider in providers:
