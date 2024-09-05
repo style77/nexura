@@ -1,8 +1,12 @@
-from dataclasses import fields, is_dataclass, MISSING
+from dataclasses import asdict, fields, is_dataclass, MISSING
+import json
 import logging
 import re
 import typing
 from nexura.providers import nexura_provider
+
+
+API_URL = "https://nexura.dev/api"
 
 
 def get_docstring(obj):
@@ -44,6 +48,30 @@ def human_readable_type(_type):
             return human_readable_list_type(_type)
         if origin is dict:
             return human_readable_dict_type(_type)
+
+    return str(_type.__name__) if hasattr(_type, "__name__") else str(_type)
+
+
+def generic_human_readable_type(_type):
+    # Different than human_readable_type, return generic type instead of the detailed type
+    # return string if it's string, instead of "gpt-4" for example
+    if _type is typing.Any:
+        return "Any"
+    if hasattr(_type, "__origin__"):
+        origin = typing.get_origin(_type)
+
+        if origin is typing.Union:
+            return "Union"
+        if origin is typing.Literal:
+            return "Literal"
+        if origin is list:
+            return "List"
+        if origin is dict:
+            return "Dict"
+        if origin is str:
+            return "String"
+        if origin is int:
+            return "Integer"
 
     return str(_type.__name__) if hasattr(_type, "__name__") else str(_type)
 
@@ -109,6 +137,7 @@ def get_dataclass_fields(dataclass_type):
         field_info = {
             "name": field.name,
             "type": human_readable_type(field_type),
+            "genericType": generic_human_readable_type(field_type),
             "description": comment_meta["striped_comment"],
             "default": get_default_value(field),
             "required": not is_optional,
@@ -170,11 +199,13 @@ def read_providers():
                 "name": endpoint.name,
                 "method": endpoint.method,
                 "path": path,
+                "nexuraPath": f"{API_URL}/{provider.id}/{endpoint.id}",
                 "category": endpoint.category,
                 "description": get_docstring(endpoint),
                 "original_docs_url": endpoint.original_docs_url,
                 "request_type": get_type_as_json(endpoint.handle_request, "body"),
                 "return_type": get_type_as_json(endpoint.handle_request, "return"),
+                "examples": [asdict(example) for example in endpoint.examples],
             }
 
     return data
@@ -183,4 +214,6 @@ def read_providers():
 if __name__ == "__main__":
     logging.info("Generating documentation")
     data = read_providers()
-    print(data)
+
+    with open("docs/src/docs.json", "w") as f:
+        json.dump(data, f, indent=4)
