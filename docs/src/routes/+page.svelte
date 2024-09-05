@@ -1,9 +1,12 @@
 <script lang="ts">
   import RequestType from "./RequestType.svelte";
   import { selectedProvider, selectedEndpoint } from "$lib/store";
-  import { onDestroy, onMount } from "svelte";
-  import docs from "../docs.json";
+  import { onDestroy } from "svelte";
+  import docsJson from "../docs.json";
+  import type { Docs } from "$lib/types";
   import CodeExamples from "./CodeExamples.svelte";
+
+  const docs: Docs = docsJson;
 
   let selectedProviderValue: string = "";
   let selectedEndpointValue: string = "";
@@ -57,108 +60,6 @@
     unsubscribeProvider();
     unsubscribeEndpoint();
   });
-
-  const examples = [
-    {
-      label: "Example 1",
-      code: {
-        python: `from openai import OpenAI
-client = OpenAI()
-
-tools = [
-    {
-        "type": "function",
-        "function": {
-            "name": "get_current_weather",
-            "description": "Get the current weather in a given location",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
-                    },
-                    "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
-                },
-                "required": ["location"]
-            }
-        }
-    }
-]
-
-response = client.chat.completions.create(
-    model="gpt-3.5-turbo-0613",
-    messages=[{"role": "user", "content": "What's the weather like in Boston?"}],
-    tools=tools,
-    tool_choice="auto",
-)`,
-        javascript: `import OpenAI from 'openai';
-
-const client = new OpenAI();
-
-const tools = [
-    {
-        "type": "function",
-        "function": {
-            "name": "get_current_weather",
-            "description": "Get the current weather in a given location",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
-                    },
-                    "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
-                },
-                "required": ["location"]
-            }
-        }
-    }
-];
-
-const response = await client.chat.completions.create({
-    model: "gpt-3.5-turbo-0613",
-    messages: [{"role": "user", "content": "What's the weather like in Boston?"}],
-    tools: tools,
-    tool_choice: "auto",
-});`,
-      },
-      response: {
-        type: "json",
-        content: `{
-    "id": "chatcmpl-123",
-    "object": "chat.completion",
-    "created": 1677652288,
-    "model": "gpt-3.5-turbo-0613",
-    "choices": [{
-        "index": 0,
-        "message": {
-            "role": "assistant",
-            "content": null,
-            "tool_calls": [
-                {
-                    "id": "call_abc123",
-                    "type": "function",
-                    "function": {
-                        "name": "get_current_weather",
-                        "arguments": "{\n  \"location\": \"Boston, MA\"\n}"
-                    }
-                }
-            ]
-        },
-        "finish_reason": "tool_calls"
-    }],
-    "usage": {
-        "prompt_tokens": 82,
-        "completion_tokens": 37,
-        "total_tokens": 119
-    }
-}`,
-      },
-    },
-    // Add more examples here
-  ];
 </script>
 
 <svelte:head>
@@ -251,7 +152,7 @@ const response = await client.chat.completions.create({
                 </div>
               </div>
               <div class="lg:flex flex-col hidden min-w-[500px]">
-                {#if endpoint.examples.length > 0}
+                {#if endpoint.examples && endpoint.examples.length > 0}
                   <CodeExamples examples={endpoint.examples} />
                 {/if}
               </div>

@@ -5,9 +5,7 @@
 
     export let examples: {
         label: string;
-        code: {
-            [key: string]: string; // Different language versions of the same code
-        };
+        code: Record<string, string | undefined>;
         response: {
             type: string;
             content: string;
