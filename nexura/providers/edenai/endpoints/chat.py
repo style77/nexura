@@ -75,7 +75,7 @@ class _Message(DataclassWithDoc):
 
 @dataclass
 class ChatResponse(DataclassWithDoc):
-    generated_test: str
+    generated_text: str
     message: typing.List[_Message]
     cost: float
 
