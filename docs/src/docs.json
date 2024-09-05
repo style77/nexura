@@ -1,0 +1,1144 @@
+{
+    "openai": {
+        "name": "OpenAI",
+        "description": "OpenAI provider",
+        "endpoints": {
+            "Chat Completions": {
+                "name": "Chat Completions",
+                "method": "POST",
+                "path": "chat-completions",
+                "nexuraPath": "https://nexura.dev/api/openai/chat-completions",
+                "category": "Chat",
+                "description": "Given a list of messages comprising a conversation, the model will return a response.",
+                "original_docs_url": "https://platform.openai.com/docs/api-reference/chat/create",
+                "request_type": [
+                    {
+                        "name": "messages",
+                        "type": "list of _SystemMessage, _UserMessage, _AssistantMessage",
+                        "genericType": "List",
+                        "description": "A list of messages comprising the conversation so far.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": {
+                            "_SystemMessage": [
+                                {
+                                    "name": "content",
+                                    "type": "str",
+                                    "genericType": "str",
+                                    "description": "The contents of the system message.",
+                                    "default": null,
+                                    "required": true,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "role",
+                                    "type": "system",
+                                    "genericType": "Literal",
+                                    "description": "The role of the messages author, in this case system.",
+                                    "default": "system",
+                                    "required": true,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "name",
+                                    "type": "str",
+                                    "genericType": "str",
+                                    "description": "An optional name for the participant. Provides the model information to differentiate between participants of the same role.",
+                                    "default": "null",
+                                    "required": false,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                }
+                            ],
+                            "_UserMessage": [
+                                {
+                                    "name": "content",
+                                    "type": "str",
+                                    "genericType": "str",
+                                    "description": "The contents of the user message.",
+                                    "default": null,
+                                    "required": true,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "role",
+                                    "type": "user",
+                                    "genericType": "Literal",
+                                    "description": "The role of the messages author, in this case user.",
+                                    "default": "user",
+                                    "required": true,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "name",
+                                    "type": "str",
+                                    "genericType": "str",
+                                    "description": "An optional name for the participant. Provides the model information to differentiate between participants of the same role.",
+                                    "default": "null",
+                                    "required": false,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                }
+                            ],
+                            "_AssistantMessage": [
+                                {
+                                    "name": "content",
+                                    "type": "str",
+                                    "genericType": "str",
+                                    "description": "The contents of the assistant message. Required unless tool_calls or function_call is specified.",
+                                    "default": "null",
+                                    "required": false,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "refusal",
+                                    "type": "str",
+                                    "genericType": "str",
+                                    "description": "The refusal message by the assistant.",
+                                    "default": "null",
+                                    "required": false,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "role",
+                                    "type": "assistant",
+                                    "genericType": "Literal",
+                                    "description": "The role of the messages author, in this case assistant.",
+                                    "default": "assistant",
+                                    "required": true,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "name",
+                                    "type": "str",
+                                    "genericType": "str",
+                                    "description": "An optional name for the participant. Provides the model information to differentiate between participants of the same role.",
+                                    "default": "null",
+                                    "required": false,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": null
+                                },
+                                {
+                                    "name": "tool_calls",
+                                    "type": "list of objects",
+                                    "genericType": "List",
+                                    "description": "The tool calls generated by the model, such as function calls.",
+                                    "default": "null",
+                                    "required": false,
+                                    "disabled": false,
+                                    "hidden": false,
+                                    "additional_meta": [],
+                                    "values": [
+                                        {
+                                            "name": "id",
+                                            "type": "str",
+                                            "genericType": "str",
+                                            "description": "The ID of the tool call.",
+                                            "default": null,
+                                            "required": true,
+                                            "disabled": false,
+                                            "hidden": false,
+                                            "additional_meta": [],
+                                            "values": null
+                                        },
+                                        {
+                                            "name": "type",
+                                            "type": "str",
+                                            "genericType": "str",
+                                            "description": "The type of the tool. Currently, only function is supported.",
+                                            "default": null,
+                                            "required": true,
+                                            "disabled": false,
+                                            "hidden": false,
+                                            "additional_meta": [],
+                                            "values": null
+                                        },
+                                        {
+                                            "name": "function",
+                                            "type": "_Function",
+                                            "genericType": "_Function",
+                                            "description": "The function that the model called.",
+                                            "default": null,
+                                            "required": true,
+                                            "disabled": false,
+                                            "hidden": false,
+                                            "additional_meta": [],
+                                            "values": [
+                                                {
+                                                    "name": "name",
+                                                    "type": "str",
+                                                    "genericType": "str",
+                                                    "description": "The name of the function to call.",
+                                                    "default": null,
+                                                    "required": true,
+                                                    "disabled": false,
+                                                    "hidden": false,
+                                                    "additional_meta": [],
+                                                    "values": null
+                                                },
+                                                {
+                                                    "name": "arguments",
+                                                    "type": "str",
+                                                    "genericType": "str",
+                                                    "description": "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.",
+                                                    "default": null,
+                                                    "required": true,
+                                                    "disabled": false,
+                                                    "hidden": false,
+                                                    "additional_meta": [],
+                                                    "values": null
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "model",
+                        "type": "gpt-4o, gpt-4o-mini, gpt-4, gpt-3.5-turbo",
+                        "genericType": "Literal",
+                        "description": "ID of the model to use.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "float",
+                        "genericType": "float",
+                        "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.",
+                        "default": 0,
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "logit_bias",
+                        "type": "map of str:int",
+                        "genericType": "Dict",
+                        "description": "Modify the likelihood of specified tokens appearing in the completion.\\nAccepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "logprobs",
+                        "type": "bool",
+                        "genericType": "bool",
+                        "description": "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`.",
+                        "default": false,
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "top_logprobs",
+                        "type": "int",
+                        "genericType": "int",
+                        "description": "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "int",
+                        "genericType": "int",
+                        "description": "The maximum number of (https://platform.openai.com/tokenizer) that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. (https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "n",
+                        "type": "int",
+                        "genericType": "int",
+                        "description": "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to minimize costs.",
+                        "default": 1,
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "float",
+                        "genericType": "float",
+                        "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.",
+                        "default": 0,
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "Any",
+                        "genericType": "Any",
+                        "description": "",
+                        "default": "null",
+                        "required": false,
+                        "disabled": "response_format TODO https://platform.openai.com/docs/api-reference/chat/create#chat-create-response_format",
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "seed",
+                        "type": "int",
+                        "genericType": "int",
+                        "description": "This feature is in Beta. If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the system_fingerprint response parameter to monitor changes in the backend.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [
+                            "BETA"
+                        ],
+                        "values": null
+                    },
+                    {
+                        "name": "service_tier",
+                        "type": "auto, default",
+                        "genericType": "Literal",
+                        "description": "Specifies the latency tier to use for processing the request. This parameter is relevant for customers subscribed to the scale tier service:\\n\\n- If set to 'auto', the system will utilize scale tier credits until they are exhausted.\\n- If set to 'default', the request will be processed using the default service tier with a lower uptime SLA and no latency guarentee.\\n- When not set, the default behavior is 'auto'.\\nWhen this parameter is set, the response body will include the service_tier utilized.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "stop",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "Up to 4 sequences where the API will stop generating further tokens.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "stream",
+                        "type": "bool",
+                        "genericType": "bool",
+                        "description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only (https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: ` message. (https://cookbook.openai.com/examples/how_to_stream_completions).",
+                        "default": false,
+                        "required": false,
+                        "disabled": "stream TODO https://platform.openai.com/docs/api-reference/chat/create#chat-create-stream",
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    }
+                ],
+                "return_type": [
+                    {
+                        "name": "id",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "A unique identifier for the chat completion.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "choices",
+                        "type": "list of objects",
+                        "genericType": "List",
+                        "description": "A list of chat completion choices. Can be more than one if n is greater than 1.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": [
+                            {
+                                "name": "finish_reason",
+                                "type": "stop, length, content_filter, tool_calls, function_call",
+                                "genericType": "Literal",
+                                "description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence, `length` if the maximum number of tokens specified in the request was reached, `content_filter` if content was omitted due to a flag from our content filters, `tool_calls` if the model called a tool, or `function_call` (deprecated) if the model called a function.",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "index",
+                                "type": "int",
+                                "genericType": "int",
+                                "description": "The index of the choice in the list of choices.",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "message",
+                                "type": "_Message",
+                                "genericType": "_Message",
+                                "description": "A chat completion message generated by the model.",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": [
+                                    {
+                                        "name": "content",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "The contents of the message.",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    },
+                                    {
+                                        "name": "role",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "The role of the author of this message.",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    },
+                                    {
+                                        "name": "refusal",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "The refusal message generated by the model.",
+                                        "default": "null",
+                                        "required": false,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    },
+                                    {
+                                        "name": "tool_calls",
+                                        "type": "list of objects",
+                                        "genericType": "List",
+                                        "description": "The tool calls generated by the model, such as function calls.",
+                                        "default": "null",
+                                        "required": false,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": [
+                                            {
+                                                "name": "id",
+                                                "type": "str",
+                                                "genericType": "str",
+                                                "description": "The ID of the tool call.",
+                                                "default": null,
+                                                "required": true,
+                                                "disabled": false,
+                                                "hidden": false,
+                                                "additional_meta": [],
+                                                "values": null
+                                            },
+                                            {
+                                                "name": "type",
+                                                "type": "str",
+                                                "genericType": "str",
+                                                "description": "The type of the tool. Currently, only function is supported.",
+                                                "default": null,
+                                                "required": true,
+                                                "disabled": false,
+                                                "hidden": false,
+                                                "additional_meta": [],
+                                                "values": null
+                                            },
+                                            {
+                                                "name": "function",
+                                                "type": "_Function",
+                                                "genericType": "_Function",
+                                                "description": "The function that the model called.",
+                                                "default": null,
+                                                "required": true,
+                                                "disabled": false,
+                                                "hidden": false,
+                                                "additional_meta": [],
+                                                "values": [
+                                                    {
+                                                        "name": "name",
+                                                        "type": "str",
+                                                        "genericType": "str",
+                                                        "description": "The name of the function to call.",
+                                                        "default": null,
+                                                        "required": true,
+                                                        "disabled": false,
+                                                        "hidden": false,
+                                                        "additional_meta": [],
+                                                        "values": null
+                                                    },
+                                                    {
+                                                        "name": "arguments",
+                                                        "type": "str",
+                                                        "genericType": "str",
+                                                        "description": "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.",
+                                                        "default": null,
+                                                        "required": true,
+                                                        "disabled": false,
+                                                        "hidden": false,
+                                                        "additional_meta": [],
+                                                        "values": null
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "logprobs",
+                                "type": "map of str:Any",
+                                "genericType": "Dict",
+                                "description": "Log probability information for the choice.",
+                                "default": "null",
+                                "required": false,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "created",
+                        "type": "int",
+                        "genericType": "int",
+                        "description": "The Unix timestamp (in seconds) of when the chat completion was created.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "model",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "The model used for the chat completion.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "object",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "The object type, which is always `chat.completion`.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "usage",
+                        "type": "_Usage",
+                        "genericType": "_Usage",
+                        "description": "Usage statistics for the completion request.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": [
+                            {
+                                "name": "completion_tokens",
+                                "type": "int",
+                                "genericType": "int",
+                                "description": "Number of tokens in the generated completion.",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "prompt_tokens",
+                                "type": "int",
+                                "genericType": "int",
+                                "description": "Number of tokens in the prompt.",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "total_tokens",
+                                "type": "int",
+                                "genericType": "int",
+                                "description": "Total number of tokens used in the request (prompt + completion).",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "service_tier",
+                        "type": "auto, default",
+                        "genericType": "Literal",
+                        "description": "The service tier used for processing the request. This field is only included if the service_tier parameter is specified in the request.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "system_fingerprint",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "This fingerprint represents the backend configuration that the model runs with.\\n\\nCan be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    }
+                ],
+                "examples": []
+            }
+        }
+    },
+    "edenai": {
+        "name": "EdenAI",
+        "description": "EdenAI provider",
+        "endpoints": {
+            "Chat": {
+                "name": "Chat",
+                "method": "POST",
+                "path": "chat",
+                "nexuraPath": "https://nexura.dev/api/edenai/chat",
+                "category": "Chat",
+                "description": "The Chat API is a specialized programming interface designed to allow users to interact with natural language processing models like GPT-3, and GPT-4. These models can be used to generate human-like responses to various inputs and queries.",
+                "original_docs_url": "https://docs.edenai.co/reference/text_chat_create",
+                "request_type": [
+                    {
+                        "name": "providers",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "It can be one (ex: 'amazon' or 'google') or multiple provider(s) (ex: 'amazon,microsoft,google') that the data will be redirected to in order to get the processed results. Providers can also be invoked with specific models (ex: providers: 'amazon/model1, amazon/model2, google/model3')",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "fallback_providers",
+                        "type": "list of str",
+                        "genericType": "List",
+                        "description": "Providers in this list will be used as fallback if the call to provider in providers parameter fails. To use this feature, you must input only one provider in the `providers` parameter. but you can put up to 5 fallbacks. They will be tried in the same order they are input, and it will stop to the first provider who doesn't fail. Doesn't work with async subfeatures.",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "response_as_dict",
+                        "type": "bool",
+                        "genericType": "bool",
+                        "description": "Optional : When set to true (default), the response is an object of responses with providers names as keys :\\n\\n`{\"google\" : { \"status\": \"success\", ... }, }`\\n\\nWhen set to false the response structure is a list of response objects :\\n\\n``.",
+                        "default": true,
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "attributes_as_list",
+                        "type": "bool",
+                        "genericType": "bool",
+                        "description": "Optional : When set to false (default) the structure of the extracted items is list of objects having different attributes :\\n\\n`{'items': }`\\n\\nWhen it is set to true, the response contains an object with each attribute as a list :\\n\\n`{ \"attribute_1\": , \"attribute_2\": }`",
+                        "default": false,
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "show_base_64",
+                        "type": "bool",
+                        "genericType": "bool",
+                        "description": "",
+                        "default": true,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "show_original_response",
+                        "type": "bool",
+                        "genericType": "bool",
+                        "description": "Optional : Shows the original response of the provider.\\n\\nWhen set to true, a new attribute original_response will appear in the response object.",
+                        "default": false,
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "text",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "Start your conversation here...",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "chatbot_global_action",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "A system message that helps set the behavior of the assistant. For example, 'You are a helpful assistant'.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "previous_history",
+                        "type": "list of objects",
+                        "genericType": "List",
+                        "description": "A list containing all the previous conversations between the user and the chatbot AI. Each item in the list should be a dictionary with two keys: 'role' and 'message'. The 'role' key specifies the role of the speaker and can have the values 'user' or 'assistant'. The 'message' key contains the text of the conversation from the respective role. For example: . This format allows easy identification of the speaker's role and their corresponding message.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": [
+                            {
+                                "name": "role",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "message",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "tools",
+                                "type": "list of objects",
+                                "genericType": "List",
+                                "description": "",
+                                "default": "null",
+                                "required": false,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": [
+                                    {
+                                        "name": "name",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    },
+                                    {
+                                        "name": "description",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    },
+                                    {
+                                        "name": "parameters",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "The tool's parameters are specified using a JSON Schema object. Detailed format documentation is available in the JSON Schema reference.\\n\\nMake sure to well describe each parameter for best results.\\n\\nExample for a weather tool:\\n\\n`{\"type\": \"object\",\"properties\": {\"location\": {\"type\": \"string\"\"description\": \"The geographical location for which weather data is requested.\"},\"unit\": {\"type\": \"string\", \"enum\": \"description\": \"The unit of measurement for temperature.\"}},\"required\": }`",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "tool_calls",
+                                "type": "list of objects",
+                                "genericType": "List",
+                                "description": "",
+                                "default": "null",
+                                "required": false,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": [
+                                    {
+                                        "name": "id",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    },
+                                    {
+                                        "name": "arguments",
+                                        "type": "str",
+                                        "genericType": "str",
+                                        "description": "",
+                                        "default": null,
+                                        "required": true,
+                                        "disabled": false,
+                                        "hidden": false,
+                                        "additional_meta": [],
+                                        "values": null
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "int",
+                        "genericType": "int",
+                        "description": "Higher values mean the model will take more risks and value 0 (argmax sampling) works better for scenarios with a well-defined answer.",
+                        "default": 0,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "int",
+                        "genericType": "int",
+                        "description": "The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length.",
+                        "default": 1000,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "tool_choice",
+                        "type": "auto, required, none",
+                        "genericType": "Literal",
+                        "description": "",
+                        "default": "auto",
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "available_tools",
+                        "type": "list of objects",
+                        "genericType": "List",
+                        "description": "A list of tools the model may generate the right arguments for.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": [
+                            {
+                                "name": "name",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "description",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "parameters",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "The tool's parameters are specified using a JSON Schema object. Detailed format documentation is available in the JSON Schema reference.\\n\\nMake sure to well describe each parameter for best results.\\n\\nExample for a weather tool:\\n\\n`{\"type\": \"object\",\"properties\": {\"location\": {\"type\": \"string\"\"description\": \"The geographical location for which weather data is requested.\"},\"unit\": {\"type\": \"string\", \"enum\": \"description\": \"The unit of measurement for temperature.\"}},\"required\": }`",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "tool_results",
+                        "type": "list of objects",
+                        "genericType": "List",
+                        "description": "List of results obtained from applying the tool_call arguments to your own tool.",
+                        "default": "null",
+                        "required": false,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": [
+                            {
+                                "name": "id",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "the id of the tool_call used to generate result",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "result",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "the result of your function",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            }
+                        ]
+                    }
+                ],
+                "return_type": [
+                    {
+                        "name": "generated_test",
+                        "type": "str",
+                        "genericType": "str",
+                        "description": "",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    },
+                    {
+                        "name": "message",
+                        "type": "list of objects",
+                        "genericType": "List",
+                        "description": "",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": [
+                            {
+                                "name": "role",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            },
+                            {
+                                "name": "message",
+                                "type": "str",
+                                "genericType": "str",
+                                "description": "",
+                                "default": null,
+                                "required": true,
+                                "disabled": false,
+                                "hidden": false,
+                                "additional_meta": [],
+                                "values": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "cost",
+                        "type": "float",
+                        "genericType": "float",
+                        "description": "",
+                        "default": null,
+                        "required": true,
+                        "disabled": false,
+                        "hidden": false,
+                        "additional_meta": [],
+                        "values": null
+                    }
+                ],
+                "examples": [
+                    {
+                        "label": "Basic",
+                        "code": {
+                            "python": "import json\nimport requests\n\nheaders = {\"Authorization\": \"Bearer {{ TOKEN }}\"}\n\nurl = \"https://api.edenai.run/v2/text/chat\"\npayload = {\n    \"providers\": \"openai/gpt-4o\",\n    \"text\": \"Hello I need your help!\",\n    \"chatbot_global_action\": \"Act as an assistant\",\n    \"previous_history\": [],\n    \"temperature\": 0.0,\n    \"max_tokens\": 150,\n}\n\nresponse = requests.post(url, json=payload, headers=headers)\n\nresult = response.json()\nprint(result['openai/gpt-4o']['generated_text'])",
+                            "javascript": "const axios = require(\"axios\").default;\n\nconst options = {\n  method: \"POST\",\n  url: \"https://api.edenai.run/v2/text/chat\",\n  headers: {\n    authorization: \"Bearer {{ TOKEN }}\",\n  },\n  data: {\n    providers: \"openai/gpt-4o\",\n    text: \"Hello I need your help!\",\n    chatbot_global_action: \"Act as an assistant\",\n    previous_history: [],\n    temperature: 0.0,\n    max_tokens: 150,\n  },\n};\n\naxios\n  .request(options)\n  .then((response) => {\n    console.log(response.data);\n  })\n  .catch((error) => {\n    console.error(error);\n  });",
+                            "bash": "#!/bin/bash\n\ncurl --request POST \\\n  --url https://api.edenai.run/v2/text/chat \\\n  -H 'authorization: Bearer {{ TOKEN }}' \\\n  -H 'content-type: application/json' \\\n  --data '{\n  \"providers\": \"openai/gpt-4o\",\n  \"text\": \"Barack Hussein Obama is an American politician who served as the 44th president of the United States from 2009 to 2017. A member of the Democratic Party, Obama was the first African-American president of the United States. He previously served as a U.S. senator from Illinois from 2005 to 2008 and as an Illinois state senator from 1997 to 2004.\",\n  \"chatbot_global_action\": \"You are a keyword extractor. Extract only the words from the text provided.\",\n  \"previous_history\": [\n    {\n      \"role\": \"user\",\n      \"message\": \"Steve Jobs was a co-founder of Apple Inc., a multinational technology company headquartered in Cupertino, California. He was also the CEO and a major shareholder of Pixar Animation Studios, which was later acquired by The Walt Disney Company. Jobs was widely recognized as a visionary entrepreneur and a pioneer in the personal computer industry. In addition to his business ventures, he was also known for his charismatic personality, his signature black turtleneck\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"message\": \"steve jobs, apple inc, pixar, california\"\n    }\n  ],\n  \"temperature\": 0,\n  \"max_tokens\": 100\n}'"
+                        },
+                        "response": {
+                            "type": "text",
+                            "content": "Example code for making a POST request using cURL."
+                        }
+                    },
+                    {
+                        "label": "Advanced",
+                        "code": {
+                            "javascript": "const hhtttpx = require(\"axios\").default;\n\nconst options = {\n  method: \"POST\",\n  url: \"https://api.edenai.run/v2/text/chat\",\n  headers: {\n    authorization: \"Bearer {{ TOKEN }}\",\n  },\n  data: {\n    providers: \"openai/gpt-4o\",\n    text: \"Hello I need your help!\",\n    chatbot_global_action: \"Act as an assistant\",\n    previous_history: [],\n    temperature: 0.0,\n    max_tokens: 150,\n  },\n};\n\naxios\n  .request(options)\n  .then((response) => {\n    console.log(response.data);\n  })\n  .catch((error) => {\n    console.error(error);\n  });",
+                            "bash": "#!/bin/bash\n\ncurl --request POST \\\n  --url https://api.edenai.run/v2/text/chat \\\n  -H 'authorization: Bearer {{ TOKEN }}' \\\n  -H 'content-type: application/json' \\\n  --data '{\n  \"providers\": \"openai/gpt-4o\",\n  \"text\": \"Barack Hussein Obama is an American politician who served as the 44th president of the United States from 2009 to 2017. A member of the Democratic Party, Obama was the first African-American president of the United States. He previously served as a U.S. senator from Illinois from 2005 to 2008 and as an Illinois state senator from 1997 to 2004.\",\n  \"chatbot_global_action\": \"You are a keyword extractor. Extract only the words from the text provided.\",\n  \"previous_history\": [\n    {\n      \"role\": \"user\",\n      \"message\": \"Steve Jobs was a co-founder of Apple Inc., a multinational technology company headquartered in Cupertino, California. He was also the CEO and a major shareholder of Pixar Animation Studios, which was later acquired by The Walt Disney Company. Jobs was widely recognized as a visionary entrepreneur and a pioneer in the personal computer industry. In addition to his business ventures, he was also known for his charismatic personality, his signature black turtleneck\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"message\": \"steve jobs, apple inc, pixar, california\"\n    }\n  ],\n  \"temperature\": 0,\n  \"max_tokens\": 100\n}'"
+                        },
+                        "response": {
+                            "type": "text",
+                            "content": "Example code for making a POST request using cURL."
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
