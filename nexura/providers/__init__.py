@@ -1,5 +1,5 @@
 import typing
-from nexura.providers.provider import Provider
+from nexura.providers.base import Provider
 from nexura.providers.openai import openai_provider
 from nexura.providers.edenai import edenai_provider
 
